@@ -19,7 +19,7 @@ app.use("/", authRoutes); // handles /login and /signup
 app.post("/analyze", analyzeWebsiteHandler);
 // serve everything in ../public as static assets
 app.use(express.static(path.join(__dirname, '../public')));
-
+app.use('/api/users', require('./routes/userRoutes'));
 // if no API route matches, send back public/index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
