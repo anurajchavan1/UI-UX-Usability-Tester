@@ -2,13 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const express = require('express');
-const router = express.Router();
 
-// this will be mounted at /api/users
-router.get('/', (req, res) => { /* ... */ });
-
-module.exports = router;
 
 // Login
 router.post("/login", async (req, res) => {
