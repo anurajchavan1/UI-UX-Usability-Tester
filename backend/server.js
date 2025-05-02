@@ -16,7 +16,6 @@ connectDB();
 
 app.use("/", authRoutes); // handles /login and /signup
 app.post("/analyze", analyzeWebsiteHandler);
-app.use('/api/users', require('./routes/userRoutes'));
 
 
 app.listen(PORT, () =>
