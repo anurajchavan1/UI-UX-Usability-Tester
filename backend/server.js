@@ -14,32 +14,19 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
-app.post('/analyze', async (req, res) => {
-  try {
-    const { url } = req.body;
-    // 1) Do your analysis, e.g. scrape the URL, compute metrics, etc.
-    const analysisResult = await analyzeWebsite(url);
+// API Routes
+app.use('/api/users', authRoutes); // Login & Signup routes
+app.post("/analyze", analyzeWebsiteHandler); // POST route for website analysis
 
-    // 2) Return a *real* value, not a comment
-    return res.json({ result: analyzeWebsiteHandler });
-  } catch (err) {
-    console.error('Analysis error:', err);
-    return res.status(500).json({ error: 'Analysis failed' });
-  }
-});
-
-
+// Serve static frontend files
 app.use(express.static(path.join(__dirname, '../public')));
-app.use('/api/users', require('./routes/userRoutes'));
 
-app.get(/.*/, (req, res) => {
+// Fallback to index.html for client-side routing
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
-app.use("/", authRoutes); // handles /login and /signup
-app.post("/analyze", analyzeWebsiteHandler);
-
-
-app.listen(PORT, () =>
-  console.log(`✅ Server running on ${PORT}`)
-);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
