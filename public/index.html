@@ -33,7 +33,7 @@
             document.getElementById('report').innerText = "Analyzing... Please wait...";
 
             try {
-                const response = await fetch("/analyze", {
+                const response = await fetch("https://ui-ux-usability-tester.onrender.com/analyze", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ url })
