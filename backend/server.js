@@ -17,13 +17,17 @@ connectDB();
 app.post('/analyze', async (req, res) => {
   try {
     const { url } = req.body;
-    // … your analysis logic …
-    return res.json({ result: /* … */ });
+    // 1) Do your analysis, e.g. scrape the URL, compute metrics, etc.
+    const analysisResult = await analyzeWebsiteHandler(url);
+
+    // 2) Return a *real* value, not a comment
+    return res.json({ result: analysisResult });
   } catch (err) {
     console.error('Analysis error:', err);
     return res.status(500).json({ error: 'Analysis failed' });
   }
 });
+
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/users', require('./routes/userRoutes'));
