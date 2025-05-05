@@ -19,7 +19,7 @@ app.use('/api/users', require('./routes/userRoutes'));
 
 app.use("/", authRoutes); // handles /login and /signup
 app.post("/analyze", analyzeWebsiteHandler);
-app.get('/:path(.*)', (req, res) => {
+app.get('/:catchAll(*)', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
