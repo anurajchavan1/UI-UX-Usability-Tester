@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 const path = require('path');
+require("dotenv").config();
+
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/userRoutes");
 const { analyzeWebsiteHandler } = require("./controllers/analysisController");
@@ -17,11 +18,13 @@ connectDB();
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/users', require('./routes/userRoutes'));
 
-app.use("/", authRoutes); // handles /login and /signup
-app.post("/analyze", analyzeWebsiteHandler);
-app.get('/:catchAll(*)', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
+
+app.use("/", authRoutes); // handles /login and /signup
+app.post("/analyze", analyzeWebsiteHandler);
+
 
 app.listen(PORT, () =>
   console.log(`✅ Server running on ${PORT}`)
