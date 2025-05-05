@@ -33,7 +33,7 @@
             document.getElementById('report').innerText = "Analyzing... Please wait...";
 
             try {
-                const response = await fetch("${window.API_BASE}/api/items/analyze", {
+                const response = await fetch("${window.API_BASE}/api/analyze", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ url })
