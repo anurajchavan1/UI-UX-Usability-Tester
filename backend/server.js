@@ -22,7 +22,7 @@ app.post("/analyze", analyzeWebsiteHandler); // POST route for website analysis
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Fallback to index.html for client-side routing
-app.get('/:*/', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
