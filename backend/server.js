@@ -18,10 +18,10 @@ app.post('/analyze', async (req, res) => {
   try {
     const { url } = req.body;
     // 1) Do your analysis, e.g. scrape the URL, compute metrics, etc.
-    const analysisResult = await analyzeWebsiteHandler(url);
+    const analysisResult = await analyzeWebsite(url);
 
     // 2) Return a *real* value, not a comment
-    return res.json({ result: analysisResult });
+    return res.json({ result: analyzeWebsiteHandler });
   } catch (err) {
     console.error('Analysis error:', err);
     return res.status(500).json({ error: 'Analysis failed' });
