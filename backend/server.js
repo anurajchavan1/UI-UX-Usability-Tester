@@ -15,7 +15,7 @@ app.use(express.json());
 
 connectDB();
 // API Routes
-app.use('/api/users', authRoutes); // Login & Signup routes
+app.use('/users', authRoutes); // Login & Signup routes
 app.post("/analyze", analyzeWebsiteHandler); // POST route for website analysis
 
 // Serve static frontend files
