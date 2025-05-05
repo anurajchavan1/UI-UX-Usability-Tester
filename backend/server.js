@@ -14,6 +14,16 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
+app.post('/analyze', async (req, res) => {
+  try {
+    const { url } = req.body;
+    // … your analysis logic …
+    return res.json({ result: /* … */ });
+  } catch (err) {
+    console.error('Analysis error:', err);
+    return res.status(500).json({ error: 'Analysis failed' });
+  }
+});
 
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/users', require('./routes/userRoutes'));
